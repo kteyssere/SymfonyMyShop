@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panier{% endblock %}
+
+{% block body %}
+    <p style="text-align: center">Total du panier : {{ totalPrice }}€</p>
+    <div style="text-align: center;margin-top: 5px;">
+        <a href="{{ path('cart_valid')}}" class="btn btn-secondary btn-lg" tabindex="-1" role="button" aria-disabled="true">Valider le pannier</a>
+    </div>
+    <div style="display: flex; align-items: center; justify-content: center">
+
+
+
+    <div class="row d-inline-flex">
+        {% for productitm in products %}
+            <div class="col-12 col-sm-6 col-md-4 p-2" style="width: 25em">
+                <div class="d-flex flex-column text-center border height100">
+                    <div>
+                    <p>{{ productitm.product.name }}</p>
+                        <a href="{{ path('product_show', {id: productitm.product.id }) }}">
+                    <img src="/products/{{ productitm.product.category.name }}/{{ productitm.product.photo }}"
+                         alt="{{ productitm.product.name }}" class="img-prod">
+                        </a>
+                    </div>
+
+                    <div>
+                    <p>{{ productitm.product.price|number_format(2) }}€</p>
+                    <p>Quantité : {{ productitm.quantity }}</p>
+{#                    <p>{{ productitm.total }}€</p>#}
+                    <a href="{{ path('shopping_cart_delete', {'id': productitm.product.id}) }}" class="btn btn-secondary btn-lg" tabindex="-1" role="button" aria-disabled="true">Supprimer</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    </div>
+
+{% endblock %}

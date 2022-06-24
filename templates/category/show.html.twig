@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ category.name }}{% endblock %}
+
+{% block body %}
+    <h1 class="h1-cat">{{ category.name }}</h1>
+
+{#    <a href="{{ path('category_index') }}" class="index-btn">Retour à la liste</a>#}
+
+{#    <a href="{{ path('category_edit', {'id': category.id}) }}" class="index-btn">Modifier</a>
+    <a href="{{ path('category_delete', {'id': category.id}) }}" class="index-btn">Supprimer</a>#}
+
+{#    {{ include('category/_delete_form.html.twig') }}#}
+    <div class= "row d-inline-flex">
+        {% for product in products %}
+        <div class="col-12 col-sm-6 col-md-4 p-2">
+            <div class="d-flex flex-column text-center border height100">
+                <a href="{{ path('product_show', {id: product.id }) }}">
+                    <img src="/products/{{ category.name }}/{{ product.photo }}" alt="{{ product.name }}" class="img-prod">
+
+                </a>
+                <p class="name-prod">{{ product.name }}</p>
+                <div>
+                    <p>{{ product.price|number_format(2) }}€</p>
+                </div>
+            </div>
+        </div>
+        {% else %}
+            <p>Aucun produit trouvé pour cette catégorie</p>
+        {% endfor %}
+    </div>
+   {# <div class="grid-container">
+        {% for product in products %}
+        <div>
+            <a href="{{ path('product_show', {id: product.id }) }}">
+                <img src="/products/{{ category.name }}/{{ product.photo }}" alt="{{ product.name }}" class="img-prod">
+
+            </a>
+            <p class="name-prod">{{ product.name }}</p>
+            <div>
+                <p>{{ product.price|number_format(2) }}€</p>
+            </div>
+        </div>
+        {% else %}
+
+            <p>Aucun produit trouvé pour cette catégorie</p>
+
+        {% endfor %}
+
+    </div>#}
+
+{% endblock %}

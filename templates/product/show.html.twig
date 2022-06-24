@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block body %}
+
+<div class="card mb-3" >
+    <div class="row g-0">
+        <div class="col-md-4">
+
+
+            <img src="/products/{{ product.category.name }}/{{ product.photo }}" alt="{{ product.name }}" class="img-fluid rounded-start" style="height: 525px;width: 525px;">
+
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+
+                <p style="text-align: left;font-size: 15pt;font-weight: bold">{{ product.name|upper }}</p>
+                <p class="price-prod">{{ product.price|number_format(2) }}€</p>
+                <p class="descr-prod">{{ product.description|trim }}</p>
+
+                <a  href="{{ path('add_to_cart', {'id': product.id }) }}" class="btn btn-secondary btn-lg" tabindex="-1" role="button" aria-disabled="true">
+                    <img src="/whiteadd_shopping_cart.png" alt="addToCart" class="" style="height: 20pt">
+                </a>
+            </div>
+
+
+        </div>
+{#        <div class="grid-show-content">
+            <p class="descr-prod">{{ product.description|trim }}</p>
+
+        </div>#}
+        <div>
+{#            <a href="{{ path('product_index') }}" class="index-btn">Retour à la liste</a>#}
+            {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('product_edit', {'id': product.id}) }}" class="btn btn-secondary btn-lg" tabindex="-1" role="button" aria-disabled="true">Modifier</a>
+            <a href="{{ path('product_delete', {'id': product.id}) }}" class="btn btn-secondary btn-lg" tabindex="-1" role="button" aria-disabled="true">Supprimer</a>
+            {% endif %}
+
+
+
+        </div>
+
+
+    </div>
+    </div>
+
+
+
+{% endblock %}
