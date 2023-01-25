@@ -61,19 +61,7 @@ class ShoppingCartController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'shopping_cart_delete', methods: ['GET', 'POST'])]
-    public function delete(int $id): Response
-    {
-        $session = $this->requestStack->getSession();
-        $cart = $session->get('cart', []);
-        if($cart[$id] > 1){
-            $cart[$id]--;
-        }else{
-            unset($cart[$id]);
-        }
-        $session->set('cart', $cart);
-        return $this->redirectToRoute('shopping_cart_index', [], Response::HTTP_SEE_OTHER);
-    }
+    
 
     #[Route('/totalProd', name: 'total_prod', methods: ['GET'])]
     public function getTotalProd(ProductRepository $productRepository)
@@ -97,7 +85,6 @@ class ShoppingCartController extends AbstractController
     #[Route('/cartvalid', name: 'cart_valid', methods: ['GET', 'POST'])]
     public function validateCart(OrdersRepository $ordersRepository, ProductRepository $productRepository, EntityManagerInterface $entityManager, OrderLineRepository $orderLineRepository)
     {
-
 
         $session = $this->requestStack->getSession();
         $cart = $session->get('cart', []);
@@ -129,6 +116,20 @@ $usr = $this->usrrepo->find($this->security->getUser());
         //$orders->set
 
         return $this->redirectToRoute('shopping_cart_index');
+    }
+
+    #[Route('/{id}', name: 'shopping_cart_delete', methods: ['GET', 'POST'])]
+    public function delete(int $id): Response
+    {
+        $session = $this->requestStack->getSession();
+        $cart = $session->get('cart', []);
+        if($cart[$id] > 1){
+            $cart[$id]--;
+        }else{
+            unset($cart[$id]);
+        }
+        $session->set('cart', $cart);
+        return $this->redirectToRoute('shopping_cart_index', [], Response::HTTP_SEE_OTHER);
     }
 
 }
