@@ -91,7 +91,11 @@ class ShoppingCartController extends AbstractController
 
         $products = [];
         $ordrLine = [];
-$usr = $this->usrrepo->find($this->security->getUser());
+        if(empty($this->security->getUser())){
+            return $this->redirectToRoute('login');
+        }
+        
+        $usr = $this->usrrepo->find($this->security->getUser());
         $orders = new Orders();
         $orders->setUser($usr);
         $orders->setAddress($usr->getAddress());
