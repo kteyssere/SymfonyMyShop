@@ -3,12 +3,16 @@
 {% block title %}Panier{% endblock %}
 
 {% block body %}
+
+{% if totalPrice > 0 %}
     <p style="text-align: center">Total du panier : {{ totalPrice }}€</p>
     <div style="text-align: center;margin-top: 5px;">
         <a href="{{ path('cart_valid')}}" class="btn btn-secondary btn-lg" tabindex="-1" role="button" aria-disabled="true">Valider le pannier</a>
     </div>
     <div style="display: flex; align-items: center; justify-content: center">
-
+{% else %}
+    <p style="text-align: center">Votre panier est vide</p>
+{% endif %}
 
 
     <div class="row d-inline-flex">
