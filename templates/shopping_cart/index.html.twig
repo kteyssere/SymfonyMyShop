@@ -11,7 +11,9 @@
     </div>
     <div style="display: flex; align-items: center; justify-content: center">
 {% else %}
-    <p style="text-align: center">Votre panier est vide</p>
+    <div class="d-flex justify-content-center">
+        <p class="mt-3">Votre panier est actuellement vide. <a href="{{ path('product_index') }}" aria-disabled="true">Visitez notre boutique </a>pour ajouter des articles.</p>
+    </div>
 {% endif %}
 
 

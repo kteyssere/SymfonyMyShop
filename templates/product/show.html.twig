@@ -17,7 +17,7 @@
 
                 <p style="text-align: left;font-size: 15pt;font-weight: bold">{{ product.name|upper }}</p>
                 <p class="price-prod">{{ product.price|number_format(2) }}€</p>
-                <p class="descr-prod">{{ product.description|trim }}</p>
+                <p class="descr-prod">{{ product.description|trans|nl2br }}</p>
 
                 <a  href="{{ path('add_to_cart', {'id': product.id }) }}" class="btn btn-secondary btn-lg" tabindex="-1" role="button" aria-disabled="true">
                     <img src="/whiteadd_shopping_cart.png" alt="addToCart" class="" style="height: 20pt">
